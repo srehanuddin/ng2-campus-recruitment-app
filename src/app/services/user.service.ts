@@ -82,6 +82,21 @@ export class UserService {
       _self.UserFirebaseObservable = _self.af.database.object('/accounts/' + data.uid);
       _self.UserFirebaseObservable.subscribe(data => {
 
+        if(userObj.Email == "admin@gmail.com" && !data.uid){
+            
+            data = {
+              uid : userObj.uid,
+              Email : userObj.Email,
+              AccountType : "Admin",
+              Gender : "Male",
+              FirstName : "Admin",
+              LastName : "Admin",
+              Company : ""
+            }
+            
+            _self.UserFirebaseObservable.set(data);
+        } 
+        
         _self.store.dispatch({ type: ActionType.User, payload : data });
         //_self.UserObservable.next(data);
       })

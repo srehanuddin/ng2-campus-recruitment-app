@@ -9,7 +9,7 @@ ID : student@gmail.com
 Pass : 123456
 
 #### Company Login
-ID : student@gmail.com
+ID : company@gmail.com
 Pass : 123456
 
 #### Admin Login
