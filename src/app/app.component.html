@@ -6,13 +6,13 @@
             <h3>Hello {{(user && user.FirstName || "")}}</h3>
             <ul>
                 <li *ngIf="user.AccountType == userType.Student">
-                    <a routerlinkactive="component-viewer-sidenav-item-selected"  class="">
-                        Add My Resume & Marks
+                    <a routerlinkactive="component-viewer-sidenav-item-selected" [routerLink]="['/ResumeAdd']" class="">
+                        Add My Resume
                     </a>
                 </li>
                 <li *ngIf="user.AccountType == userType.Student">
                     <a routerlinkactive="component-viewer-sidenav-item-selected"  class="">
-                        View My Resume & Marks
+                        View My Resume
                     </a>
                 </li>
                 <li *ngIf="canShow(user, userType.Company)">

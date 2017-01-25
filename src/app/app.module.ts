@@ -21,12 +21,15 @@ import { UserService } from './services/user.service';
 import { JobsService } from './services/jobs.service';
 import { LoggedInGuardService } from './services/logged-in-guard.service';
 import { AccountsService } from './services/accounts.service';
+import { ResumesService } from './services/resumes.service';
 import { LoginComponent } from './components/login/login.component';
 import { CompaniesComponent } from './components/companies/companies.component';
 import { StudentsComponent } from './components/students/students.component';
 import { PostJobsComponent } from './components/post-jobs/post-jobs.component';
 import { JobsComponent } from './components/jobs/jobs.component';
 import { JobDetailComponent } from './components/job-detail/job-detail.component';
+import { ResumeAddComponent } from './components/resume-add/resume-add.component';
+import { ResumeComponent } from './components/resume/resume.component';
 
 export const appRoutes: Routes = [
   { path: '', component: HomeComponent, canActivate: [LoggedInGuardService] },
@@ -39,20 +42,9 @@ export const appRoutes: Routes = [
   { path: 'Jobs/:id', component: JobsComponent, canActivate: [LoggedInGuardService]  },
   { path: 'JobDetail/:id', component: JobDetailComponent, canActivate: [LoggedInGuardService]  },
   { path: 'Students', component: StudentsComponent, data: {access : ["Admin", "Company"]}, canActivate: [LoggedInGuardService]  },
+  { path: 'ResumeAdd', component: ResumeAddComponent, data: {access : ["Student"]}, canActivate: [LoggedInGuardService]  },
   { path: 'Sample', component: SampleComponent },
   { path: '**', component: PageNotFoundComponent }
-  /*{ path: 'crisis-center', component: CrisisListComponent },
-  { path: 'hero/:id',      component: HeroDetailComponent },
-  {
-    path: 'heroes',
-    component: HeroListComponent,
-    data: { title: 'Heroes List' }
-  },
-  { path: '',
-    redirectTo: '/heroes',
-    pathMatch: 'full'
-  },
-  { path: '**', component: PageNotFoundComponent }*/
 ];
 
 @NgModule({
@@ -67,7 +59,9 @@ export const appRoutes: Routes = [
     StudentsComponent,
     PostJobsComponent,
     JobsComponent,
-    JobDetailComponent
+    JobDetailComponent,
+    ResumeAddComponent,
+    ResumeComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +77,8 @@ export const appRoutes: Routes = [
     UserService,
     AccountsService,
     JobsService,
-    LoggedInGuardService
+    LoggedInGuardService,
+    ResumesService
   ],
   bootstrap: [AppComponent]
 })
