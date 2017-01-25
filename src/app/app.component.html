@@ -11,12 +11,12 @@
                     </a>
                 </li>
                 <li *ngIf="user.AccountType == userType.Student">
-                    <a routerlinkactive="component-viewer-sidenav-item-selected"  class="">
+                    <a routerlinkactive="component-viewer-sidenav-item-selected" [routerLink]="['/Resume', user.uid]" class="">
                         View My Resume
                     </a>
                 </li>
                 <li *ngIf="canShow(user, userType.Company)">
-                    <a routerlinkactive="component-viewer-sidenav-item-selected" [routerLink]="['/JobsPost']"  class="">
+                    <a routerlinkactive="component-viewer-sidenav-item-selected" [routerLink]="['/JobsPost']" class="">
                         Post Jobs
                     </a>
                 </li>

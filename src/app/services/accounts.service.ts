@@ -6,6 +6,7 @@ import UserModel from "../models/user.model";
 @Injectable()
 export class AccountsService {
   
+  account: FirebaseObjectObservable<UserModel>;
   accounts: FirebaseListObservable<UserModel[]>;
   accountTypeSubject: Subject<String>;
   
@@ -26,6 +27,10 @@ export class AccountsService {
     setTimeout(function(){
       self.accountTypeSubject.next(accountType);
     },100);
+  }
+
+  fetchAccount(id){
+    this.account = this.af.database.object('/accounts/' + id);
   }
 
   deleteAccount(key: string) {    

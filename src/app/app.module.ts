@@ -43,6 +43,7 @@ export const appRoutes: Routes = [
   { path: 'JobDetail/:id', component: JobDetailComponent, canActivate: [LoggedInGuardService]  },
   { path: 'Students', component: StudentsComponent, data: {access : ["Admin", "Company"]}, canActivate: [LoggedInGuardService]  },
   { path: 'ResumeAdd', component: ResumeAddComponent, data: {access : ["Student"]}, canActivate: [LoggedInGuardService]  },
+  { path: 'Resume/:id', component: ResumeComponent, data: {access : ["Admin", "Student", "Company"]}, canActivate: [LoggedInGuardService]  },
   { path: 'Sample', component: SampleComponent },
   { path: '**', component: PageNotFoundComponent }
 ];

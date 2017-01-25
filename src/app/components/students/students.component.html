@@ -13,7 +13,7 @@
         <!--<p md-line> {{item.Gender}} </p>-->
 
         <span class="example-spacer"></span>
-        <button md-button md-raised-button color="primary" >View</button>
+        <button md-button md-raised-button color="primary" [routerLink]="['/Resume', item.uid]" >View</button>
         <button md-button md-raised-button color="danger" *ngIf="user?.AccountType == 'Admin'" (click)="delete(item.$key)" >Delete</button>
         <md-divider ng-if="num < accounts.length - 1"></md-divider>
       </md-list-item>
