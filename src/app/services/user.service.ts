@@ -21,7 +21,7 @@ export class UserService {
 
       if(data && data.uid){
         console.log(data.uid);
-        _self.UserFirebaseObservable = _self.af.database.object('/users/' + data.uid);
+        _self.UserFirebaseObservable = _self.af.database.object('/accounts/' + data.uid);
 
         _self.UserFirebaseObservable.subscribe(data => {
           //_self.UserObservable.next(data);
@@ -55,7 +55,7 @@ export class UserService {
 
       userObj.uid = data.uid;
 
-      _self.UserFirebaseObservable = _self.af.database.object('/users/' + data.uid);
+      _self.UserFirebaseObservable = _self.af.database.object('/accounts/' + data.uid);
       _self.UserFirebaseObservable.set(userObj);
       //_self.UserObservable.next(userObj);
       _self.store.dispatch({ type: ActionType.User, payload : userObj });
@@ -79,7 +79,7 @@ export class UserService {
 
       userObj.uid = data.uid;
 
-      _self.UserFirebaseObservable = _self.af.database.object('/users/' + data.uid);
+      _self.UserFirebaseObservable = _self.af.database.object('/accounts/' + data.uid);
       _self.UserFirebaseObservable.subscribe(data => {
 
         _self.store.dispatch({ type: ActionType.User, payload : data });

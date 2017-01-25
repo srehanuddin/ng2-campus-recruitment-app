@@ -26,20 +26,35 @@
             <md-hint *ngIf="myForm.controls['Email'].touched && myForm.controls['Email'].hasError('required')" [ngStyle]="{'color': 'red'}" align="start">Required</md-hint>
           </md-input-container>
 
+          <md-input-container class="example-full-width">
+            <input md-input placeholder="Password" type="password" [formControl]="myForm.controls['Password']">
+            <md-hint *ngIf="myForm.controls['Password'].touched && myForm.controls['Password'].hasError('required')" [ngStyle]="{'color': 'red'}" align="start">Required</md-hint>
+          </md-input-container>
+
           <br>
           <br>
 
-          <md-select placeholder="Gender" name="gender" class="example-full-width" [formControl]="myForm.controls['Gender']">
+          <md-select placeholder="Account Type" name="accountType" class="example-full-width" [formControl]="myForm.controls['AccountType']">
+            <md-option *ngFor="let uType of userTypeArr" [value]="uType">{{uType}}</md-option>
+            <md-hint *ngIf="myForm.controls['AccountType'].touched && myForm.controls['AccountType'].hasError('required')" [ngStyle]="{'color': 'red'}" align="start">Required</md-hint>
+          </md-select>
+
+          <br>
+          <br>
+          <br>
+
+          <md-select placeholder="Gender" name="gender" class="example-full-width" *ngIf="myForm.controls['AccountType'].value == userType.Student" [formControl]="myForm.controls['Gender']">
             <md-option value="Male">Male</md-option>
             <md-option value="Female">Female</md-option>
             <md-hint *ngIf="myForm.controls['Gender'].touched && myForm.controls['Gender'].hasError('required')" [ngStyle]="{'color': 'red'}" align="start">Required</md-hint>
           </md-select>
 
-          <md-input-container class="example-full-width">
-            <input md-input placeholder="Password" type="password" [formControl]="myForm.controls['Password']">
-            <md-hint *ngIf="myForm.controls['Password'].touched && myForm.controls['Password'].hasError('required')" [ngStyle]="{'color': 'red'}" align="start">Required</md-hint>
+          <md-input-container class="example-full-width" *ngIf="myForm.controls['AccountType'].value == userType.Company" >
+            <input md-input placeholder="Company" type="text" [formControl]="myForm.controls['Company']">
+            <md-hint *ngIf="myForm.controls['Company'].touched && myForm.controls['Company'].hasError('required')" [ngStyle]="{'color': 'red'}" align="start">Required</md-hint>
           </md-input-container>
-          
+
+
         </md-card-content>
         <md-card-actions class="text-right padding-right-20 padding-bottom-10">
           <span class="example-spacer"></span>

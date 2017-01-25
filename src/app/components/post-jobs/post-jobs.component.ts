@@ -3,38 +3,40 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from "../../services/user.service";
-import UserModel, {UserTypeArr, UserType} from "../../models/user.model";
+import { JobsService } from "../../services/jobs.service";
+import UserModel from "../../models/user.model";
+import JobModel from "../../models/job.model";
+
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: 'app-post-jobs',
+  templateUrl: './post-jobs.component.html',
+  styleUrls: ['./post-jobs.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class PostJobsComponent implements OnInit {
+
   myForm: FormGroup;
-  userTypeArr = UserTypeArr;
-  userType = UserType;
+  user: UserModel;
   constructor(
     fb: FormBuilder, 
     private userService : UserService,
+    private jobsService : JobsService,
     private router: Router,
     private store: Store<UserModel>
     ) {
+      
 
     this.myForm = fb.group({
-      'FirstName': ['', Validators.required],
-      'LastName': ['', Validators.required],
-      'Email': ['', Validators.compose([Validators.required])],
-      'Gender': [''],
-      'Password': ['', Validators.required],
-      'AccountType': ['', Validators.required],
-      'Company': [''],
+      'JobTitle': ['', Validators.required],
+      'JobDescription': ['', Validators.required],
+      'Salary': ['', Validators.required],
+      'JobType': ['', Validators.required],
     });
 
     store.select('appStore').subscribe((data : UserModel) => {
       console.log("data from UserObservable", data);
       if(data && data.uid){
-        this.router.navigate(['/Home']);
+        this.user = data;
       }
     });
 
@@ -46,19 +48,19 @@ export class RegisterComponent implements OnInit {
     });*/
   }
 
-  onSubmit(value: any): void {
+  onSubmit(value: JobModel): void {
 
     if(!this.myForm.valid){
       console.log("Form Not Valid");
       return;
     }
 
-    if(value.AccountType == this.userType.Company && !value.Company){
-      console.log("Enter Company Name");
-      return;
-    }
+    value.uid = this.user.uid;
+    value.Company = this.user.Company;
+
     console.log('you submitted value: ', value);
-    this.userService.firebaseCreateUser(value);
+    this.jobsService.addJob(value);
+    this.router.navigate(['/Home']);
 
   }
 

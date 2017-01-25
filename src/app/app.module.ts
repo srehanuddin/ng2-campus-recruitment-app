@@ -8,7 +8,6 @@ import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { MaterialModule } from '@angular/material';
 import { StoreModule } from '@ngrx/store';
 
-
 import { appReducer } from './app.store';
 import { myFirebaseAuthConfig, firebaseConfig } from './app.config';
 
@@ -19,13 +18,26 @@ import { SampleComponent } from './components/sample/sample.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { RegisterComponent } from './components/register/register.component';
 import { UserService } from './services/user.service';
+import { JobsService } from './services/jobs.service';
+import { AccountsService } from './services/accounts.service';
 import { LoginComponent } from './components/login/login.component';
+import { CompaniesComponent } from './components/companies/companies.component';
+import { StudentsComponent } from './components/students/students.component';
+import { PostJobsComponent } from './components/post-jobs/post-jobs.component';
+import { JobsComponent } from './components/jobs/jobs.component';
+import { JobDetailComponent } from './components/job-detail/job-detail.component';
 
 const appRoutes: Routes = [
   { path: '',  component: HomeComponent },
   { path: 'Home', component: HomeComponent },
   { path: 'Login', component: LoginComponent },
   { path: 'Register', component: RegisterComponent },
+  { path: 'Companies', component: CompaniesComponent },
+  { path: 'JobsPost', component: PostJobsComponent },
+  { path: 'Jobs', component: JobsComponent },
+  { path: 'Jobs/:id', component: JobsComponent },
+  { path: 'JobDetail/:id', component: JobDetailComponent },
+  { path: 'Students', component: StudentsComponent },
   { path: 'Sample', component: SampleComponent },
   { path: '**', component: PageNotFoundComponent }
   /*{ path: 'crisis-center', component: CrisisListComponent },
@@ -50,6 +62,11 @@ const appRoutes: Routes = [
     PageNotFoundComponent,
     RegisterComponent,
     LoginComponent,
+    CompaniesComponent,
+    StudentsComponent,
+    PostJobsComponent,
+    JobsComponent,
+    JobDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +79,9 @@ const appRoutes: Routes = [
     StoreModule.provideStore({ appStore: appReducer })
   ],
   providers: [
-    UserService
+    UserService,
+    AccountsService,
+    JobsService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 
+import { AccountsService } from './services/accounts.service';
 import { UserService } from './services/user.service';
-import UserModel from './models/user.model';
+import UserModel, { UserType } from './models/user.model';
 
 @Component({
   selector: 'app-root',
@@ -12,14 +13,20 @@ import UserModel from './models/user.model';
 export class AppComponent {
   title = 'app works!';
   user : UserModel;
+  userType = UserType;
 
-  constructor(private userService : UserService, private store: Store<UserModel>){
+  constructor(
+    private userService : UserService, 
+    private store: Store<UserModel>
+    ){
     userService.firebaseIsLogin();
 
     store.select('appStore').subscribe((data : UserModel) => {
       console.log("data from UserObservable App Component", data);
       this.user = data;
+      
     });
+
 
     /*
     userService.UserObservable.subscribe(data => {
