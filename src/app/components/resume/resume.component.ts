@@ -60,7 +60,6 @@ export class ResumeComponent implements OnInit {
       });
 
       this.account.subscribe((data : UserModel) => {
-        console.log("HEREHERE", data)
         this.accountDetail = data;
       });
 

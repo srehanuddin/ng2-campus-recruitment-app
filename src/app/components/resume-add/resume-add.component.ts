@@ -16,6 +16,7 @@ export class ResumeAddComponent implements OnInit {
 
   myForm: FormGroup;
   user: UserModel;
+  resume : ResumeModel;
   constructor(
     fb: FormBuilder, 
     private userService : UserService,
@@ -24,8 +25,6 @@ export class ResumeAddComponent implements OnInit {
     private store: Store<UserModel>
     ) {
 
-    
-      
 
     this.myForm = fb.group({
       'LastEducation': ['', Validators.required],
@@ -35,6 +34,7 @@ export class ResumeAddComponent implements OnInit {
       'Skills': ['', Validators.required],
       'Description': ['', Validators.required],
     });
+    
 
     store.select('appStore').subscribe((data : UserModel) => {
       console.log("data from UserObservable", data);
@@ -44,8 +44,8 @@ export class ResumeAddComponent implements OnInit {
         this.resumesService.fetchResumeObj(data.uid);
 
         this.resumesService.resume.subscribe((resume : ResumeModel) => {
-    
-            this.myForm = fb.group({
+          
+          this.myForm = fb.group({
               'LastEducation': [resume.LastEducation || '', Validators.required],
               'LastEducationYear': [resume.LastEducationYear || '', Validators.required],
               'LastEducationGrade': [resume.LastEducationGrade || '', Validators.required],
@@ -53,6 +53,8 @@ export class ResumeAddComponent implements OnInit {
               'Skills': [resume.Skills || '', Validators.required],
               'Description': [resume.Description || '', Validators.required],
             });
+
+          this.resume = resume;
 
         });
 
