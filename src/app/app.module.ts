@@ -1,0 +1,69 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { RouterModule, Routes } from '@angular/router';
+import 'hammerjs';
+import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
+import { MaterialModule } from '@angular/material';
+import { StoreModule } from '@ngrx/store';
+
+
+import { appReducer } from './app.store';
+import { myFirebaseAuthConfig, firebaseConfig } from './app.config';
+
+
+import { AppComponent } from './app.component';
+import { HomeComponent } from './Components/home/home.component';
+import { SampleComponent } from './components/sample/sample.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { RegisterComponent } from './components/register/register.component';
+import { UserService } from './services/user.service';
+import { LoginComponent } from './components/login/login.component';
+
+const appRoutes: Routes = [
+  { path: '',  component: HomeComponent },
+  { path: 'Home', component: HomeComponent },
+  { path: 'Login', component: LoginComponent },
+  { path: 'Register', component: RegisterComponent },
+  { path: 'Sample', component: SampleComponent },
+  { path: '**', component: PageNotFoundComponent }
+  /*{ path: 'crisis-center', component: CrisisListComponent },
+  { path: 'hero/:id',      component: HeroDetailComponent },
+  {
+    path: 'heroes',
+    component: HeroListComponent,
+    data: { title: 'Heroes List' }
+  },
+  { path: '',
+    redirectTo: '/heroes',
+    pathMatch: 'full'
+  },
+  { path: '**', component: PageNotFoundComponent }*/
+];
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    SampleComponent,
+    PageNotFoundComponent,
+    RegisterComponent,
+    LoginComponent,
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpModule,
+    MaterialModule.forRoot(),
+    RouterModule.forRoot(appRoutes),
+    AngularFireModule.initializeApp(firebaseConfig, myFirebaseAuthConfig),
+    StoreModule.provideStore({ appStore: appReducer })
+  ],
+  providers: [
+    UserService
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
