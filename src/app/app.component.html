@@ -5,12 +5,12 @@
         <nav *ngIf="(user && user.uid)">
             <h3>Hello {{(user && user.FirstName || "")}}</h3>
             <ul>
-                <li *ngIf="canShow(user, userType.Student)">
+                <li *ngIf="user.AccountType == userType.Student">
                     <a routerlinkactive="component-viewer-sidenav-item-selected"  class="">
-                        My Profile
+                        Add My Resume & Marks
                     </a>
                 </li>
-                <li *ngIf="canShow(user, userType.Student)">
+                <li *ngIf="user.AccountType == userType.Student">
                     <a routerlinkactive="component-viewer-sidenav-item-selected"  class="">
                         View My Resume & Marks
                     </a>

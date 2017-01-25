@@ -38,4 +38,8 @@ export class JobsService {
     this.jobs.push(job);
   }
 
+  deleteJob(key: string) {    
+    this.jobs.remove(key); 
+  }
+
 }

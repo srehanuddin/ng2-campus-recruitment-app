@@ -68,4 +68,19 @@ export class JobsComponent implements OnInit {
   ngOnInit() {
   }
 
+  canDelete(user : UserModel, uid){
+    if(user.AccountType == "Admin"){
+      return true;
+    } else if(user.uid == uid){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  delete(key : string){
+    console.log("key : ", key);
+    this.jobsService.deleteJob(key)
+  }
+
 }

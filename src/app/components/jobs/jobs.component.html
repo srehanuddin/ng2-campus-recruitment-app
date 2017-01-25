@@ -13,7 +13,7 @@
 
         <span class="example-spacer"></span>
         <button md-button md-raised-button color="primary" [routerLink]="['/JobDetail', item.$key ]" >View</button>
-        <!--<button md-button md-raised-button color="danger" >Delete</button>-->
+        <button md-button md-raised-button color="danger" *ngIf="canDelete(user, item.uid)" (click)="delete(item.$key)" >Delete</button>
         <!--<md-divider ></md-divider>-->
       </md-list-item>
       
