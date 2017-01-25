@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
 
 import { AccountsService } from './services/accounts.service';
 import { UserService } from './services/user.service';
@@ -17,7 +18,8 @@ export class AppComponent {
 
   constructor(
     private userService : UserService, 
-    private store: Store<UserModel>
+    private store: Store<UserModel>,
+    private router: Router,
     ){
     userService.firebaseIsLogin();
 
@@ -38,5 +40,16 @@ export class AppComponent {
 
   logout(){
     this.userService.firebaseLogout();
+    this.router.navigate(['/Login']);
+  }
+
+  canShow(user : UserModel, role){
+    if(user.AccountType == "Admin"){
+      return true;
+    } else if(user.AccountType == role){
+      return true;
+    } else {
+      return false;
+    }
   }
 }

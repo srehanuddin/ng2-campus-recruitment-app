@@ -37,11 +37,13 @@ export class LoggedInGuardService implements CanActivate {
       if(this.urls[url] && this.urls[url].length && this.urls[url].indexOf(this.user.AccountType) != -1 ){
         return true;
       } else if(this.urls[url] && this.urls[url].length) {
+        //this.router.navigate(["\Login"]);
         return false;
       } else {
         return true;
       }
     } else {
+      //this.router.navigate(["\Login"]);
       return false;
     }
   }

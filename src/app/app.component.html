@@ -5,24 +5,24 @@
         <nav *ngIf="(user && user.uid)">
             <h3>Hello {{(user && user.FirstName || "")}}</h3>
             <ul>
-                <li>
+                <li *ngIf="canShow(user, userType.Student)">
                     <a routerlinkactive="component-viewer-sidenav-item-selected"  class="">
                         My Profile
                     </a>
                 </li>
-                <li>
+                <li *ngIf="canShow(user, userType.Student)">
                     <a routerlinkactive="component-viewer-sidenav-item-selected"  class="">
                         View My Resume & Marks
                     </a>
                 </li>
-                <li>
+                <li *ngIf="canShow(user, userType.Company)">
                     <a routerlinkactive="component-viewer-sidenav-item-selected" [routerLink]="['/JobsPost']"  class="">
                         Post Jobs
                     </a>
                 </li>
-                <li>
+                <li *ngIf="canShow(user, userType.Company)">
                     <a routerlinkactive="component-viewer-sidenav-item-selected" [routerLink]="['/Jobs']" class="">
-                        View Company Jobs
+                        View My Jobs
                     </a>
                 </li>
             </ul>
@@ -31,12 +31,17 @@
         <nav *ngIf="(user && user.uid)">
             <h3>View</h3>
             <ul>
-                <li>
+                <li *ngIf="canShow(user, userType.Student)">
                     <a routerlinkactive="component-viewer-sidenav-item-selected" [routerLink]="['/Companies']" class="">
                         Companies
                     </a>
                 </li>
-                <li>
+                <li *ngIf="canShow(user, userType.Student)">
+                    <a routerlinkactive="component-viewer-sidenav-item-selected" [routerLink]="['/Jobs']" class="">
+                        View Jobs
+                    </a>
+                </li>
+                <li *ngIf="canShow(user, userType.Company)">
                     <a routerlinkactive="component-viewer-sidenav-item-selected"  [routerLink]="['/Students']" class="">
                         Students
                     </a>
