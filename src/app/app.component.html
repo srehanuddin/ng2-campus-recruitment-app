@@ -33,17 +33,17 @@
             <ul>
                 <li *ngIf="canShow(user, userType.Student)">
                     <a routerlinkactive="component-viewer-sidenav-item-selected" [routerLink]="['/Companies']" class="">
-                        Companies
+                        View All Companies
                     </a>
                 </li>
                 <li *ngIf="canShow(user, userType.Student)">
                     <a routerlinkactive="component-viewer-sidenav-item-selected" [routerLink]="['/Jobs']" class="">
-                        View Jobs
+                        View All Jobs
                     </a>
                 </li>
                 <li *ngIf="canShow(user, userType.Company)">
                     <a routerlinkactive="component-viewer-sidenav-item-selected"  [routerLink]="['/Students']" class="">
-                        Students
+                        View All Students
                     </a>
                 </li>
             </ul>
