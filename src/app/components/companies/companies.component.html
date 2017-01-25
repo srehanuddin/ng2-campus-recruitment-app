@@ -13,7 +13,7 @@
 
         <span class="example-spacer"></span>
         <button md-button md-raised-button color="primary" [routerLink]="['/Jobs', item.uid ]" >View</button>
-        <!--<button md-button md-raised-button color="danger" >Delete</button>-->
+        <button md-button md-raised-button color="danger" *ngIf="user?.AccountType == 'Admin'" (click)="delete(item.$key)" >Delete</button>
         <!--<md-divider ></md-divider>-->
       </md-list-item>
       
@@ -21,8 +21,4 @@
 
 
   </md-card-content>
-  <!--<md-card-actions class="text-right padding-right-20 padding-bottom-10">
-    <span class="example-spacer"></span>
-    <button md-button md-raised-button color="primary" type="submit">Register</button>
-  </md-card-actions>-->
 </md-card>

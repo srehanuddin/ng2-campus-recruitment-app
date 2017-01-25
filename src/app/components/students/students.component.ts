@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseListObservable } from 'angularfire2';
-import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AccountsService } from '../../services/accounts.service';
 import UserModel, { UserType } from "../../models/user.model";
@@ -16,7 +15,7 @@ export class StudentsComponent implements OnInit {
   accounts : FirebaseListObservable<any[]>;
   user : UserModel;
 
-  constructor(private accountService : AccountsService, private store: Store<UserModel>,) {
+  constructor(private accountService : AccountsService, private store: Store<UserModel>) {
 
     accountService.fetchAccounts(UserType.Student)
     this.accounts = accountService.accounts;
