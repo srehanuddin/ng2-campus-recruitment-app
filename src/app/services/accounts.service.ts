@@ -28,6 +28,8 @@ export class AccountsService {
     },100);
   }
 
-  
+  deleteAccount(key: string) {    
+    this.accounts.remove(key); 
+  }
 
 }
