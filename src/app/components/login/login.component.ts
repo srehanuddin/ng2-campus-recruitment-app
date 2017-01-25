@@ -12,7 +12,8 @@ import UserModel from "../../models/user.model";
 })
 export class LoginComponent implements OnInit {
 
-myForm: FormGroup;
+  myForm: FormGroup;
+  
   constructor(
     fb: FormBuilder, 
     private userService : UserService, 

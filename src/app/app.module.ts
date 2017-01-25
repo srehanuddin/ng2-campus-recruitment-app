@@ -19,6 +19,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { RegisterComponent } from './components/register/register.component';
 import { UserService } from './services/user.service';
 import { JobsService } from './services/jobs.service';
+import { LoggedInGuardService } from './services/logged-in-guard.service';
 import { AccountsService } from './services/accounts.service';
 import { LoginComponent } from './components/login/login.component';
 import { CompaniesComponent } from './components/companies/companies.component';
@@ -27,17 +28,17 @@ import { PostJobsComponent } from './components/post-jobs/post-jobs.component';
 import { JobsComponent } from './components/jobs/jobs.component';
 import { JobDetailComponent } from './components/job-detail/job-detail.component';
 
-const appRoutes: Routes = [
-  { path: '',  component: HomeComponent },
-  { path: 'Home', component: HomeComponent },
+export const appRoutes: Routes = [
+  { path: '', component: HomeComponent, canActivate: [LoggedInGuardService] },
+  { path: 'Home', component: HomeComponent, data: {access : ["Admin", "Student", "Company"]}, canActivate: [LoggedInGuardService]  },
   { path: 'Login', component: LoginComponent },
   { path: 'Register', component: RegisterComponent },
-  { path: 'Companies', component: CompaniesComponent },
-  { path: 'JobsPost', component: PostJobsComponent },
-  { path: 'Jobs', component: JobsComponent },
-  { path: 'Jobs/:id', component: JobsComponent },
-  { path: 'JobDetail/:id', component: JobDetailComponent },
-  { path: 'Students', component: StudentsComponent },
+  { path: 'Companies', component: CompaniesComponent, canActivate: [LoggedInGuardService]  },
+  { path: 'JobsPost', component: PostJobsComponent, data: {access : ["Admin", "Company"]}, canActivate: [LoggedInGuardService]  },
+  { path: 'Jobs', component: JobsComponent, canActivate: [LoggedInGuardService]  },
+  { path: 'Jobs/:id', component: JobsComponent, canActivate: [LoggedInGuardService]  },
+  { path: 'JobDetail/:id', component: JobDetailComponent, canActivate: [LoggedInGuardService]  },
+  { path: 'Students', component: StudentsComponent, data: {access : ["Admin", "Company"]}, canActivate: [LoggedInGuardService]  },
   { path: 'Sample', component: SampleComponent },
   { path: '**', component: PageNotFoundComponent }
   /*{ path: 'crisis-center', component: CrisisListComponent },
@@ -81,7 +82,8 @@ const appRoutes: Routes = [
   providers: [
     UserService,
     AccountsService,
-    JobsService
+    JobsService,
+    LoggedInGuardService
   ],
   bootstrap: [AppComponent]
 })
